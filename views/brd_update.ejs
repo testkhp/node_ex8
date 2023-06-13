@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 수정페이지</title>
+</head>
+<body>
+     <!-- 파일첨부 1개만 시킬 때-->
+     <!-- <form id="upload" action="/dbupdate" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" name="num" value="<%- data.num %>">
+        <input type="text" name="title" value="<%- data.title %>">
+        <input type="text" name="author" value="<%- data.author %>">
+       
+        <input type="file" name="thumbnail">
+        <button type="submit">게시글 수정완료</button>
+   </form> -->
+
+   <!-- 파일첨부 여러개 시킬 때-->
+   <form id="upload" action="/dbupdate2" method="post" enctype="multipart/form-data">
+
+        <input type="hidden" name="num" value="<%- data.num %>">
+        <input type="text" name="title" value="<%- data.title %>" required>
+        <input type="text" name="author" value="<%- data.author %>" required>
+    
+        <input type="file" name="thumbnail" multiple>
+        <button type="submit">게시글 수정완료</button>
+    </form>
+
+    <!-- 파일확장자 처리 여기서도 처리(여러분들이 해보세요)-->
+    <!-- input type="file"을 여러개 사용 시 (응용) -->
+</body>
+</html>

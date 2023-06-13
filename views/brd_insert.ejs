@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 등록페이지</title>
+</head>
+<body>
+    <!-- 파일첨부 1개만 시킬 때-->
+     <!-- <form id="upload" action="/dbupload" method="post" enctype="multipart/form-data">
+         <input type="text" name="title" required>
+         <input type="text" name="author" required>
+        
+         <input id="file" type="file" name="thumbnail">
+         <button id="submit" type="submit">게시글 등록완료</button>
+    </form>  -->
+    
+
+    <!-- 파일첨부 여러개 시킬 때-->
+    <form id="upload" action="/dbupload2" method="post" enctype="multipart/form-data">
+        <input type="text" name="title" required>
+        <input type="text" name="author" required>
+
+        <input id="file" type="file" name="thumbnail" multiple>
+        <button id="submit" type="submit">게시글 등록완료</button>
+   </form>
+
+    <!-- input type="file"을 여러개 사용 시 (응용) -->
+    <script>
+        //첨부한 파일의 확장자 체크 기능
+        const upload = document.querySelector("#upload"); //데이터 전송역할
+        const inputFile = document.querySelector("#file"); // 첨부파일 input태그
+        const submitBtn = document.querySelector("#submit"); // 전송 버튼
+        const extCheck = [".jpg",".png",".jpeg",".gif"]; //업로드시 체크할 확장명들
+
+        //첨부파일이 3개라고 가정했을 때 하나라도 이미지 파일이 아니면 업로드 불가
+        let validRequest = false; // true일 때 데이터 전송 처리할 역할
+        let validCount = 0; // 체크 시 이미지파일에 맞는 경우면 카운트가 1씩 증가  
+
+                                        // 이벤트 객체
+        submitBtn.addEventListener("click",(e)=>{
+            //반복문으로 첨부파일 갯수만큼 돌려야죠
+            
+            for(let i=0; i< inputFile.files.length; i++){
+                
+                let fileName = inputFile.files[i].name; // 파일명 갖고오기 0 , 1 , 2 ....
+                let fileLen = fileName.length; // 해당 파일명 글자수
+                let fileDots = fileName.lastIndexOf("."); // .jpg 에서 . 기호 시작위치번호값
+                let fileExts = fileName.substring(fileDots,fileLen); // 확장명 글자 추출
+                let fileChange = fileExts.toLowerCase(); // 확장명 글자를 소문자로 변경
+                let result = extCheck.includes(fileChange); //해당 확장명이 위 배열안에 있는지 체크
+                
+                //체크 결과가 true값이면 카운트가 1증가
+                //false 카운트 증가없음
+                if(result){
+                    validCount++; //참이면 1증가
+                    if(validCount === inputFile.files.length){
+                        validRequest = true; //체크된 횟수가 파일갯수랑 동일하면 true로 변경
+                    }
+                }
+            }
+           
+           //validRequest 값이 true면 데이터를 전송 false 값이면 전송불가
+           if(validRequest){
+              upload.submit(); //데이터 전송
+              
+           }
+           else{
+              validCount = 0; //카운트 숫자 초기화
+              alert("이미지 파일들만 올릴 수 있어요");
+              e.preventDefault();
+           }
+           
+        })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //문자열 관련 함수 복습
+        let test = "파일첨.부 머리깨짐.JPG";
+        //비교할 확장자들 배열로 준비
+        let checkList = [".jpg",".jpeg",".png",".gif"];
+
+        // indexOf("찾고싶은문자열") 앞에서부터   lastIndexOf("") 뒤에서부터
+        let result = test.lastIndexOf(".");
+        console.log(result);
+        
+        //배열명.includes("문자열") 해당 배열안에 데이터가 있는지 확인하는 명령어 -> boolean
+        let result2 = checkList.includes(".png");
+        console.log(result2);
+
+        //substring(시작번호값(포함),끝번호값(불포함))
+        let result3 = test.substring(10,14);
+                                // lastIndexOf(".")로 찾은 순번값 서부터 , length 값
+        console.log(result3);
+
+        let result4 = result3.toLowerCase(); //해당 문자열 소문자로 변경
+        console.log(result4);
+    </script>
+</body>
+</html>

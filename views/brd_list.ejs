@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 목록페이지</title>
+    <style>
+        .lists { margin:30px;}
+        .lists img {width:300px; }
+        /*썸네일 이미지 사이즈 일괄적으로 통일*/
+    </style>
+</head>
+<body>
+    <% for(let i=0; i<data.length; i++){%>
+        <div class="lists">
+            <div><%- data[i].num %></div>
+            <a href="/board/detail/<%- data[i].num %>">
+                <img src="/upload/<%- data[i].attachfile[0] %>"> <!-- 첨부한 썸네일 이미지-->
+                <h2><%- data[i].title %></h2>
+                <p><%- data[i].author %></p>
+            </a>
+        </div>
+    <% } %>
+
+    <a href="/board/insert">게시글 등록페이지</a>
+</body>
+</html>

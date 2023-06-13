@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 상세페이지</title>
+</head>
+<body>
+    <div><%- data.num %></div>
+    <div><%- data.title %></div>
+    <div><%- data.author %></div>
+    
+    <% for(let i=0; i<data.attachfile.length; i++) {%>
+        <div>
+            <img src="/upload/<%- data.attachfile[i] %>">
+            <a href="/upload/<%- data.attachfile[i] %>" download>다운로드</a>
+        </div>
+    <% } %>
+    <!-- 첨부파일 다운로드 a태그에 download 속성 붙일 것
+         href는 저장된 폴더 위치에 파일명까지 명시할 것
+    -->
+   
+
+    <a href="/board/update/<%- data.num %>">수정</a>
+
+
+    <a href="/board/list">목록페이지로</a>
+</body>
+</html>

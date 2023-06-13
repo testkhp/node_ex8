@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 등록페이지</title>
+</head>
+<body>
+    <!-- 파일첨부 1개만 시킬 때-->
+     <form id="upload" action="/dbupload" method="post" enctype="multipart/form-data">
+         <input type="text" name="title" required>
+         <input type="text" name="author" required>
+        
+         <input id="file" type="file" name="thumbnail">
+         <button id="submit" type="submit">게시글 등록완료</button>
+    </form> 
+    
+
+    <!-- 파일첨부 여러개 시킬 때-->
+    <!-- <form action="/dbupload2" method="post" enctype="multipart/form-data">
+        <input type="text" name="title">
+        <input type="text" name="author">
+
+        <input type="file" name="thumbnail" multiple>
+        <button typ="submit">게시글 등록완료</button>
+   </form> -->
+
+    <!-- input type="file"을 여러개 사용 시 (응용) -->
+    <script>
+        //첨부한 파일의 확장자 체크 기능
+        const upload = document.querySelector("#upload"); //데이터 전송역할
+        const inputFile = document.querySelector("#file"); // 첨부파일 input태그
+        const submitBtn = document.querySelector("#submit"); // 전송 버튼
+        const extCheck = [".jpg",".png",".jpeg",".gif"]; //업로드시 체크할 확장명들
+
+                                        // 이벤트 객체
+        submitBtn.addEventListener("click",(e)=>{
+           
+                                //첨부한 파일의 데이터값 해당태그.files  <-- type="file"
+                                //files는 배열 데이터
+            let fileName = inputFile.files[0].name; //첨부한 파일명
+            console.log("파일명은?" + fileName);
+
+            let fileLength = fileName.length; //파일명 문자열 갯수값
+            console.log("파일명 문자열 갯수" + fileLength);
+
+            let fileDots = fileName.lastIndexOf("."); //파일명에서 .기호 시작순번값 찾기
+            console.log(".기호가 시작하는 순번" + fileDots);
+
+            let fileExt = fileName.substring(fileDots,fileLength); // .부터 끝에있는 확장명 글자까지
+            console.log("추출한 확장자" + fileExt);
+
+            let fileCheck = extCheck.includes(fileExt); //추출한 확장명 문자열이 배열에 포함되어있는지
+            console.log("체크결과" + fileCheck); 
+
+            //조건문으로 fileCheck값이 true면 데이터 전송 아니면 경고창 띄우기
+            if(fileCheck){
+                upload.submit(); //데이터 전송
+            }
+            else{
+                alert("이미지 파일만 첨부 가능합니다");
+                e.preventDefault(); //페이지 이동 금지
+            }
+        })
+        
+    </script>
+</body>
+</html>

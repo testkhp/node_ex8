@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>자전거 구역 연습</title>
+    <style>
+        /* css 초기화 
+        css reset -> 태그가 기본적으로 가지고 있는 css 속성값을
+                     초기화시켜놓고 작업자가 원하는 형태로
+                     다시 작업하기 위해 세팅하는 작업 */
+        /* 전체선택자 -> body포함 안에서 작업하는 모든태그 선택 */
+        * { margin:0px; padding:0px;}
+        img { vertical-align:top;}
+        /* line-height:1 단위없이 사용하는 경우 
+           16 X 1 = 16 , 25 X 1 = 25 */
+        body { line-height:1;}
+
+        .bike_product_list {width:320px; background:pink; }
+        .bike_top_wrap { text-align:center; 
+                         padding-top:40px;
+                         padding-bottom:40px;
+                         border-bottom:1px solid black;}
+        .bike_title {font-size:20px; 
+                     margin-top:20px;
+                     margin-left:20px;
+                     margin-bottom:18px;}
+        .bike_context {margin-left:20px; 
+                       margin-bottom:18px;
+                       font-size:12px;
+                       line-height:16px;}
+        .bike_price {margin-left:20px;
+                     padding-bottom:16px; 
+                     font-size:20px; 
+                     font-weight:bold;
+                     color:brown;}
+        /*부모안에 자식요소들중 
+         가장 첫번째 자식요소와 가장 마지막번째 자식요소에는
+         마진(위,아래)을 적용하는순간 무색의 빈여백만 표시된다.
+         */
+    </style>
+</head>
+<body>
+    <div class="bike_product_list">
+        <div class="bike_top_wrap">
+            <img class="bike_top_img" src="img/bike.jpg">
+        </div>
+        <h2 class="bike_title">Leader 725</h2>
+        <p class="bike_context">
+            Leader 725는 많은 라이더들이 찾는 가장 인기<br/>
+            있는 제품입니다. 블랙 무광의 멋진 Leader 725<br/>
+            제품을 만나보세요
+        </p>
+        <p class="bike_price">750,000</p>
+    </div>
+</body>
+</html>
